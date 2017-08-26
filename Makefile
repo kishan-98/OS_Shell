@@ -1,10 +1,16 @@
-all : shell
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+CC = gcc
+EXEC = shell
 
-shell : shell.o
-		gcc -o shell shell.o 
+all:$(EXEC)
 
-shell.o : shell.c
-		gcc -c shell.c
+$(EXEC) : $(OBJ)
+	$(CC) $^ -o $@
 
-clean :
-		rm shell *.o
+%.o : %.c
+	$(CC) -c $<
+
+#.PHONY: clean
+clean:
+	rm -f $(OBJ) $(EXEC)

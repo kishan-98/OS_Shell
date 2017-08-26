@@ -1,2 +1,7 @@
-int BUFFER_SIZE = (1<<10)
-int TOKEN_SIZE = (1<<5)
+#ifndef GLOBAL_VARIABLE
+#define GLOBAL_VARIABLE
+
+extern const int BUFFER_SIZE;
+extern const int TOKEN_SIZE;
+
+#endif
