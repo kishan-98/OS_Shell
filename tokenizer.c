@@ -1,5 +1,13 @@
 #include"tokenizer.h"
 
+void print_info(char** lines , int count_lines){
+    int curr_count = 0;
+    for(; curr_count < count_lines; curr_count++){
+        fprintf(stdout , "%s\n" , lines[curr_count]);
+    }
+    return;
+}
+
 char** tokenize(char* line){
     int curr_token_size = TOKEN_SIZE;
     char ** tokens = (char**)malloc(curr_token_size*sizeof(char*));
@@ -23,5 +31,6 @@ char** tokenize(char* line){
         curr_token = strtok(line , DELIMITERS);
     }
     tokens[curr_pos++] = NULL;
+    print_info(tokens , curr_pos);
     return tokens;
 }

@@ -1,5 +1,10 @@
 #include"parsing.h"
 
+void print_info(char* line){
+    fprintf(stdout , "%s\n" , line);
+    return;
+}
+
 char* parse(){
     int curr_buffer_size = BUFFER_SIZE;
     int curr_pos = 0;
@@ -8,10 +13,11 @@ char* parse(){
         fprintf(stderr , "%s\n" , "Memory Allocation Error");
         exit(EXIT_FAILURE);
     }
-    while(true){
+    while(1){
         char c = getch();
         if(c == '\n' || c == EOF){
             command[curr_pos++] = '\0';
+            print_info(command);
             return command;
         }
         else{
