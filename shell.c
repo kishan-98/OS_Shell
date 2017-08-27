@@ -14,7 +14,7 @@ void init_shell(void)
 	printf("> ");
 	line = parse();
 	args = tokenize(line);
-	//status = execute(args);
+	status = execute(args);
 
 	free(line);
 	free(args);
