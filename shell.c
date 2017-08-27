@@ -18,7 +18,7 @@ void init_shell(void)
 
 	free(line);
 	free(args);
-} while (status == 0);
+} while (status);
 }
 
 int main(int argc, char **argv)
