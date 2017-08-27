@@ -24,8 +24,10 @@ int (*execute_command[])(char **) = {
     &exit_command
 };
 
+//No of commands which we are implementing
 int count_commands = sizeof(builtin_commands)/sizeof(char*);
 
+//Initializing the shell
 void init_shell(void)
 {
 	char *line;

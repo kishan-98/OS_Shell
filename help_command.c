@@ -2,6 +2,7 @@
 
 int help_command(char **command)
 {
+    //Provides help for this shell
     int id;
     fprintf(stdout , "%s\n", "Welcome to shell!");
     fprintf(stdout , "%s\n", "To use shell type anyone of the below commands with appropriate arguments and hit enter");

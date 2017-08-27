@@ -20,11 +20,13 @@ char** tokenize(char* line){
     }
     curr_token = strtok(line , DELIMITERS);
     while(curr_token){
+        //Token is still there for the command
         tokens[curr_pos++] = curr_token;
         if(curr_pos >= curr_token_size){
+            //Tokens
             curr_token_size += TOKEN_SIZE;
-            curr_token = realloc(curr_token , curr_token_size);
-            if(!curr_token){
+            tokens = realloc(tokens , curr_token_size);
+            if(!tokens){
                 fprintf(stderr , "%s\n" , "Memory Allocation Error");
                 exit(EXIT_FAILURE);
             }

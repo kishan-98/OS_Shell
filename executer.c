@@ -1,5 +1,6 @@
 #include "executer.h"
 
+//Function to launch system command which we did not implement without syscall
 int launch_system_command(char **command)
 {
   pid_t pid, wpid;
@@ -30,6 +31,7 @@ int launch_system_command(char **command)
   return 1;
 }
 
+//Execute the given command after inputterd throught parser and argumented by tokenizer
 int execute(char** command){
     if(command[0] == NULL)
     {
@@ -46,6 +48,6 @@ int execute(char** command){
         }
     }
 
-    //Command not found; Get the syscall
+    //Command not found; Get it done by system
     return launch_system_command(command);
 }

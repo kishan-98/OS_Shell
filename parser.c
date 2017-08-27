@@ -17,14 +17,17 @@ char* parse(){
     while(1){
         char c = getchar();
         if(c == '\n' || c == EOF){
+            //Line is over; Stop parsing further
             command[curr_pos++] = '\0';
             //print_info(command);
             return command;
         }
         else{
+            //Line is still to be parsed
             command[curr_pos++] = c;
         }
         if(curr_pos >= curr_buffer_size){
+            //Line seems to be more than expected size; realloc the memory
             curr_buffer_size += BUFFER_SIZE;
             command = realloc(command , curr_buffer_size);
             if(!command){
