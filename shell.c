@@ -65,6 +65,9 @@ void init_shell(void)
 	current_directory[1] = '\0';
 	strcpy(previous_directory , current_directory);
 
+	fprintf(stdout , "%s\n", "Welcome to shell!");
+	fprintf(stdout , "%s %s\n", "Your shell directory is" , shell_directory);
+
 	do
 	{
 		fprintf(stdout , "%s@%s : %s > " , user , host , current_directory);

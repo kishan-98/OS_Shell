@@ -7,10 +7,16 @@ int cd_command(char **command)
         //Not any command
         fprintf(stderr , "%s\n", "command: expected command");
     }
-    else if(command[1] == NULL || command[1][0] == '~')
+    else if(command[1] == NULL)
     {
         //Go to root directory
         //fprintf(stderr , "%s\n", "command: expected argument to \"cd\"");
+        command[1] = (char*)malloc(2*sizeof(char));
+        command[1][0] = '~';
+        command[1][1] = '\0';
+        return cd_command(command);
+    }
+    else if(command[1][0] == '~'){
         if(chdir(shell_directory) != 0)
         {
             perror("command");
