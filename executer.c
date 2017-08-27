@@ -27,7 +27,7 @@ int cd_command(char **args)
     {
         fprintf(stderr , "%s\n", "command: expected argument to \"cd\"");
     }
-    else if(chdir(args) != 0)
+    else if(chdir(args[1]) != 0)
     {
         perror("command");
     }
@@ -61,14 +61,14 @@ int launch_command(char **command)
   if (pid == 0) {
     // Child process
     if (execvp(command[0], command) == -1) {
-      perror("lsh");
+      perror("command");
     }
     exit(EXIT_FAILURE);
   }
   else if (pid < 0)
   {
     // Error forking
-    perror("lsh");
+    perror("command");
   }
   else
   {
