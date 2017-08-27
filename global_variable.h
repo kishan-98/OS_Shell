@@ -7,5 +7,8 @@ extern const char* DELIMITERS;
 extern const char (*builtin_commands[]);
 extern const int (*execute_command[])(char **);
 extern const int count_commands;
+extern const char* shell_directory;
+extern char* current_directory;
+extern char* previous_directory;
 
 #endif

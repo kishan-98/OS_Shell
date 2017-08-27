@@ -27,12 +27,24 @@ int (*execute_command[])(char **) = {
 //No of commands which we are implementing
 int count_commands = sizeof(builtin_commands)/sizeof(char*);
 
+//Initializing the various directory path
+char* shell_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
+char* current_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
+char* previous_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
+
 //Initializing the shell
 void init_shell(void)
 {
 	char *line;
 	char **args;
 	int status = 0;
+
+	shell_directory = (char*)malloc(BUFFER_SIZE*sizeof(char));
+	current_directory = (char*)malloc(BUFFER_SIZE*sizeof(char));
+	previous_directory = (char*)malloc(BUFFER_SIZE*sizeof(char));
+	getcwd(shell_directory , BUFFER_SIZE - 1);
+	strcpy(current_directory , shell_directory);
+	strcpy(previous_directory , current_directory);
 
 	do
 	{
