@@ -6,6 +6,7 @@ void print_info(char* line){
 }
 
 char* parse(){
+    //fprintf(stdout , "%s\n" , "Inside parser");
     int curr_buffer_size = BUFFER_SIZE;
     int curr_pos = 0;
     char* command = (char*)malloc(curr_buffer_size*sizeof(char));
@@ -17,7 +18,7 @@ char* parse(){
         char c = getchar();
         if(c == '\n' || c == EOF){
             command[curr_pos++] = '\0';
-            print_info(command);
+            //print_info(command);
             return command;
         }
         else{

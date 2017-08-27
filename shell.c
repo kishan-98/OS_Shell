@@ -7,18 +7,18 @@ void init_shell(void)
 {
 	char *line;
 	char **args;
-	int status;
+	int status = 0;
 
-	do 
+	do
 	{
 	printf("> ");
 	line = parse();
 	args = tokenize(line);
-	//status = lsh_execute(args);
+	//status = execute(args);
 
 	free(line);
 	free(args);
-	} while (status);
+} while (status == 0);
 }
 
 int main(int argc, char **argv)
@@ -26,4 +26,3 @@ int main(int argc, char **argv)
 	init_shell();
 	return EXIT_SUCCESS;
 }
-

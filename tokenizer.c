@@ -9,6 +9,7 @@ void print_info1(char** lines , int count_lines){
 }
 
 char** tokenize(char* line){
+    //fprintf(stdout , "%s\n" , "Inside tokenizer");
     int curr_token_size = TOKEN_SIZE;
     char ** tokens = (char**)malloc(curr_token_size*sizeof(char*));
     char * curr_token;
@@ -28,9 +29,9 @@ char** tokenize(char* line){
                 exit(EXIT_FAILURE);
             }
         }
-        curr_token = strtok(line , DELIMITERS);
+        curr_token = strtok(NULL , DELIMITERS);
     }
     tokens[curr_pos++] = NULL;
-    print_info1(tokens , curr_pos);
+    //print_info1(tokens , curr_pos);
     return tokens;
 }

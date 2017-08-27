@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <sys/utsname.h>
 
-#define DELIMITERS " \t\n\r\a"
+const char* DELIMITERS = " \t\n\r\a";
 #define COMMAND_DELIM ";"
 
 void init_shell(void);
