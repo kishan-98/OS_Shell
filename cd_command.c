@@ -19,25 +19,15 @@ int cd_command(char **command)
         else
         {
             strcpy(previous_directory , current_directory);
-            strcpy(current_directory , shell_directory);
+            strcpy(current_directory , command[1]);
             return 1;
         }
     }
     else if(command[1][0] == '-')
     {
         //Go to previous working directory
-        if(chdir(previous_directory) != 0)
-        {
-            perror("command");
-            return 1;
-        }
-        else
-        {
-            char* temp = previous_directory;
-            previous_directory = current_directory;
-            current_directory = temp;
-            return 1;
-        }
+        strcpy(command[1] , previous_directory);
+        return cd_command(command);
     }
     else if(chdir(command[1]) != 0)
     {

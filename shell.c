@@ -38,17 +38,36 @@ void init_shell(void)
 	char *line;
 	char **args;
 	int status = 0;
+	char *user;
+	char *host;
+	register struct passwd *pw;
+	register uid_t uid;
+	register struct hostent *host_obj;
+
+	user = malloc(sizeof(char)*BUFFER_SIZE);
+	host = malloc(sizeof(char)*BUFFER_SIZE);
+
+	// Getting the Username of the process
+	uid = geteuid();
+	pw = getpwuid(uid);
+	user = pw -> pw_name;
+
+	// Getting the Hostname of the process
+	host[BUFFER_SIZE-1] = '\0';
+	gethostname(host, BUFFER_SIZE-1);
 
 	shell_directory = (char*)malloc(BUFFER_SIZE*sizeof(char));
 	current_directory = (char*)malloc(BUFFER_SIZE*sizeof(char));
 	previous_directory = (char*)malloc(BUFFER_SIZE*sizeof(char));
 	getcwd(shell_directory , BUFFER_SIZE - 1);
-	strcpy(current_directory , shell_directory);
+	//strcpy(current_directory , shell_directory);
+	current_directory[0] = '~';
+	current_directory[1] = '\0';
 	strcpy(previous_directory , current_directory);
 
 	do
 	{
-		printf("> ");
+		fprintf(stdout , "%s@%s : %s > " , user , host , current_directory);
 		line = parse();
 		args = tokenize(line);
 		status = execute(args);
