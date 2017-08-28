@@ -7,6 +7,7 @@ int help_command(char **command);
 int cd_command(char **command);
 int pwd_command(char **command);
 int echo_command(char **command);
+int pinfo_command(char **command);
 int exit_command(char **command);
 
 //These must be synced with the function below
@@ -15,6 +16,7 @@ char (*builtin_commands[]) = {
     "cd",
     "pwd",
 	"echo",
+    "pinfo",
     "exit"
 };
 
@@ -24,6 +26,7 @@ int (*execute_command[])(char **) = {
     &cd_command,
 	&pwd_command,
 	&echo_command,
+    &pinfo_command,
     &exit_command
 };
 
