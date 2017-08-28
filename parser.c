@@ -5,7 +5,7 @@ void print_info(char* line){
     return;
 }
 
-char* parse(){
+char** parse(){
     //fprintf(stdout , "%s\n" , "Inside parser");
     int curr_buffer_size = BUFFER_SIZE;
     int curr_pos = 0;
@@ -20,7 +20,7 @@ char* parse(){
             //Line is over; Stop parsing further
             command[curr_pos++] = '\0';
             //print_info(command);
-            return command;
+            return tokenize(command , COMMAND_DELIMITER);
         }
         else{
             //Line is still to be parsed

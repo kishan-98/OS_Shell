@@ -38,9 +38,9 @@ char* previous_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
 //Initializing the shell
 void init_shell(void)
 {
-	char *line;
+	char **lines;
 	char **args;
-	int status = 0;
+	int status = 1;
 	char *user;
 	char *host;
 	register struct passwd *pw;
@@ -74,11 +74,17 @@ void init_shell(void)
 	do
 	{
 		fprintf(stdout , "%s@%s : %s > " , user , host , current_directory);
-		line = parse();
-		args = tokenize(line);
-		status = execute(args);
-
-		free(line);
+		lines = parse();
+		if(lines)
+		{
+			int i;
+			for(i = 0; lines[i]; i++)
+			{
+				args = tokenize(lines[i] , DELIMITERS);
+				status = execute(args);
+			}
+		}
+		free(lines);
 		free(args);
 	} while (status);
 }

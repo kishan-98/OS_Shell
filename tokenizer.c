@@ -8,8 +8,12 @@ void print_info1(char** lines , int count_lines){
     return;
 }
 
-char** tokenize(char* line){
+char** tokenize(char* line , char* delimiters){
     //fprintf(stdout , "%s\n" , "Inside tokenizer");
+    if(!line || line[0] == '\n' || !delimiters)
+    {
+        return NULL;
+    }
     int curr_token_size = TOKEN_SIZE;
     char ** tokens = (char**)malloc(curr_token_size*sizeof(char*));
     char * curr_token;
@@ -18,7 +22,7 @@ char** tokenize(char* line){
         fprintf(stderr , "%s\n" , "Memory Allocation Error");
         exit(EXIT_FAILURE);
     }
-    curr_token = strtok(line , DELIMITERS);
+    curr_token = strtok(line , delimiters);
     while(curr_token){
         //Token is still there for the command
         tokens[curr_pos++] = curr_token;
@@ -31,7 +35,7 @@ char** tokenize(char* line){
                 exit(EXIT_FAILURE);
             }
         }
-        curr_token = strtok(NULL , DELIMITERS);
+        curr_token = strtok(NULL , delimiters);
     }
     tokens[curr_pos++] = NULL;
     //print_info1(tokens , curr_pos);

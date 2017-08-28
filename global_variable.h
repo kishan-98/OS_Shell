@@ -4,6 +4,7 @@
 extern const int BUFFER_SIZE;
 extern const int TOKEN_SIZE;
 extern const char* DELIMITERS;
+extern const char* COMMAND_DELIMITER;
 extern const char (*builtin_commands[]);
 extern const int (*execute_command[])(char **);
 extern const int count_commands;
