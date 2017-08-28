@@ -6,6 +6,7 @@ int BUFFER_SIZE = 1024;
 int help_command(char **command);
 int cd_command(char **command);
 int pwd_command(char **command);
+int echo_command(char **command);
 int exit_command(char **command);
 
 //These must be synced with the function below
@@ -13,6 +14,7 @@ char (*builtin_commands[]) = {
     "help",
     "cd",
     "pwd",
+	"echo",
     "exit"
 };
 
@@ -21,6 +23,7 @@ int (*execute_command[])(char **) = {
     &help_command,
     &cd_command,
 	&pwd_command,
+	&echo_command,
     &exit_command
 };
 

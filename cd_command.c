@@ -6,6 +6,7 @@ int cd_command(char **command)
     {
         //Not any command
         fprintf(stderr , "%s\n", "command: expected command");
+        return 1;
     }
     else if(command[1] == NULL)
     {

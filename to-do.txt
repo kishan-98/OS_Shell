@@ -1,0 +1,8 @@
+echo
+pinfo
+ls
+foreground/background
+bonus:
+	proper exit info
+	nightswatch command
+

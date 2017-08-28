@@ -6,6 +6,7 @@ int exit_command(char **command)
     {
         //Not any command
         fprintf(stderr , "%s\n", "command: expected command");
+        return 1;
     }
     //Returns 0 so that the shell stops
     return 0;
