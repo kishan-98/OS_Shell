@@ -8,4 +8,4 @@ const int BUFFER_SIZE;
 const char* DELIMITERS;
 
 void print_info1(char** lines , int count_lines);
-char** tokenize(char* line , char* delimiters);
+char** tokenize(char* line , const char* delimiters);

@@ -10,9 +10,16 @@ int pinfo_command(char **command)
     }
     else if(command[1] == NULL)
     {
-        //Go to root directory
-        fprintf(stderr , "%s\n", "command: expected argument to \"pinfo\"");
-        return 1;
+        //Get the process id of current running shell
+        //fprintf(stderr , "%s\n", "command: expected argument to \"pinfo\"");
+        command[1] = (char*)malloc(BUFFER_SIZE*sizeof(char));
+        if(sprintf(command[1] , "%d" , (int)getpid()) < 0)
+        {
+            perror("Error in getting current pid");
+            return 1;
+        }
+        fprintf(stderr , "%s\n", "getting current pid");
+        return pinfo_command(command);
     }
     char* process_exe = (char*)malloc(BUFFER_SIZE*sizeof(char));
     char* process_status = (char*)malloc(BUFFER_SIZE*sizeof(char));
@@ -23,14 +30,14 @@ int pinfo_command(char **command)
     strcat(process_exe , "/exe");
     strcat(process_status , "/status");
     readlink(process_exe , process_info , BUFFER_SIZE - 1);
-    fprintf(stdout, "\n%s\n\n", process_info);
     FILE* fp = fopen(process_status , "r");
     if(!fp)
     {
         //Error in opening file
-        fprintf(stdout, "%s\n", "Error in opening file");
+        perror("Error in opening file");
         return 1;
     }
+    fprintf(stdout, "\n%s\n\n", process_info);
     //fprintf(stdout, "%s\n", "File opened");
     int curr_line = 0 , lines = 17 , curr_target = 0, target_lines[4] = {2,5,13,17};//target_lines is for reading targetted lines
     size_t buffer_size = BUFFER_SIZE;

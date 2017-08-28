@@ -1,4 +1,4 @@
-pinfo
+pinfo is little incomplete; give the lines you want to print
 ls
 foreground/background
 bonus:

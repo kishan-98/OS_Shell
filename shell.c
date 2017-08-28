@@ -86,9 +86,9 @@ void init_shell(void)
 				args = tokenize(lines[i] , DELIMITERS);
 				status = execute(args);
 			}
+            free(lines);
+    		free(args);
 		}
-		free(lines);
-		free(args);
 	} while (status);
 }
 

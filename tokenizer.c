@@ -8,9 +8,9 @@ void print_info1(char** lines , int count_lines){
     return;
 }
 
-char** tokenize(char* line , char* delimiters){
+char** tokenize(char* line , const char* delimiters){
     //fprintf(stdout , "%s\n" , "Inside tokenizer");
-    if(!line || line[0] == '\n' || !delimiters)
+    if(!line || line[0] == '\0' || !delimiters)
     {
         return NULL;
     }
