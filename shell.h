@@ -10,9 +10,4 @@ const char* COMMAND_DELIMITER = ";";
 
 void init_shell(void);
 
-char** tokenize(char* line , const char* delimiters);
-void print_info1(char** lines , int count_lines);
-void print_info(char* line);
-char** parse();
-
 int main();

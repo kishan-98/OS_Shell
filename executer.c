@@ -1,39 +1,48 @@
 #include "executer.h"
 
 //Function to launch system command which we did not implement without syscall
-int launch_system_command(char **command)
+int launch_system_command(char **command , int background)
 {
-  pid_t pid, wpid;
-  int status;
+    //fprintf(stdout, "%s %d:%s\n", "Inside launch_system_command and background is" , background , command[0]);
+    pid_t pid, wpid;
+    int status;
 
-  pid = fork();
-  if (pid == 0) {
-    // Child process
-    if (execvp(command[0], command) == -1) {
-      perror("command");
-    }
-    exit(EXIT_FAILURE);
-  }
-  else if (pid < 0)
-  {
-    // Error forking
-    perror("command");
-  }
-  else
-  {
-    // Parent process
-    do
+    pid = fork();
+    if (pid == 0)
     {
-      wpid = waitpid(pid, &status, WUNTRACED);
-    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
-  }
-
-  return 1;
+        // Child process
+        /*if(background){
+            setpgid(0 , 0);
+        }*/
+        if (execvp(command[0], command) == -1)
+        {
+          perror("command");
+        }
+        exit(EXIT_FAILURE);
+    }
+    else if (pid < 0)
+    {
+        // Error forking
+        perror("command");
+    }
+    else if(!background)
+    {
+        //Parent process with background
+        do
+        {
+          wpid = waitpid(pid, &status, WUNTRACED);
+        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    }
+    else{
+        // Parent process without background
+        fprintf(stdout, "%s %s %d %s\n", command[0] , "process with process id" , pid , "started");
+    }
+    return 1;
 }
 
 //Execute the given command after inputterd throught parser and argumented by tokenizer
 int execute(char** command){
-    if(command[0] == NULL)
+    if(!command || !command[0])
     {
         return 1;
     }
@@ -49,5 +58,5 @@ int execute(char** command){
     }
 
     //Command not found; Get it done by system
-    return launch_system_command(command);
+    return launch_system_command(command , is_background(command));
 }

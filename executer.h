@@ -10,6 +10,6 @@ const int BUFFER_SIZE;
 const char* DELIMITERS;
 
 //If function is not present, then call syscall
-int launch_system_command(char **args);
+int launch_system_command(char **command , int background);
 
 int execute(char** command);

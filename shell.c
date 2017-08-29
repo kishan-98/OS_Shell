@@ -44,6 +44,7 @@ void init_shell(void)
 	char **lines;
 	char **args;
 	int status = 1;
+    int background = 0;
 	char *user;
 	char *host;
 	register struct passwd *pw;
@@ -84,7 +85,8 @@ void init_shell(void)
 			for(i = 0; lines[i]; i++)
 			{
 				args = tokenize(lines[i] , DELIMITERS);
-				status = execute(args);
+                //background = is_background(args);
+                status = execute(args);
 			}
             free(lines);
     		free(args);
