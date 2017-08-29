@@ -19,7 +19,7 @@ int is_background(char **command)
     int i;
     for(i = 1; command[i]; i++)
     {
-        if(strcmp(command[i] , "&") == 0)
+        if(!strcmp(command[i] , "&") || !strcmp(command[i] , "bg"))
         {
             //This command is background process
             return 1;
