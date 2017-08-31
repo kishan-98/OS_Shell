@@ -5,6 +5,7 @@ int BUFFER_SIZE = 1024;
 
 int help_command(char **command);
 int cd_command(char **command);
+int ls_command(char **command);
 int pwd_command(char **command);
 int echo_command(char **command);
 int pinfo_command(char **command);
@@ -14,6 +15,7 @@ int exit_command(char **command);
 char (*builtin_commands[]) = {
     "help",
     "cd",
+    "ls",
     "pwd",
 	"echo",
     "pinfo",
@@ -24,6 +26,7 @@ char (*builtin_commands[]) = {
 int (*execute_command[])(char **) = {
     &help_command,
     &cd_command,
+    &ls_command,
 	&pwd_command,
 	&echo_command,
     &pinfo_command,
@@ -41,7 +44,7 @@ char* previous_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
 //Initializing the shell
 void init_shell(void)
 {
-	char **lines;
+  char **lines;
 	char **args;
 	int status = 1;
     int background = 0;
@@ -72,8 +75,7 @@ void init_shell(void)
 	current_directory[1] = '\0';
 	strcpy(previous_directory , current_directory);
 
-	fprintf(stdout , "%s\n", "Welcome to shell!");
-	fprintf(stdout , "%s %s\n", "Your shell directory is" , shell_directory);
+	fprintf(stdout , "%s %s\n", "Shell directory is" , shell_directory);
 
 	do
 	{
@@ -97,7 +99,5 @@ void init_shell(void)
 int main(int argc, char **argv)
 {
 	init_shell();
-	fprintf(stdout, "%s\n", "GoodBye!");
-	fprintf(stdout, "%s\n", "Have a nice day.");
 	return EXIT_SUCCESS;
 }
