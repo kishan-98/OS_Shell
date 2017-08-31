@@ -9,6 +9,7 @@ int ls_command(char **command);
 int pwd_command(char **command);
 int echo_command(char **command);
 int pinfo_command(char **command);
+int nightswatch_command(char **command);
 int exit_command(char **command);
 
 //These must be synced with the function below
@@ -19,6 +20,8 @@ char (*builtin_commands[]) = {
     "pwd",
 	"echo",
     "pinfo",
+    "nightswatch",
+    "nw",
     "exit"
 };
 
@@ -30,6 +33,8 @@ int (*execute_command[])(char **) = {
 	&pwd_command,
 	&echo_command,
     &pinfo_command,
+    &nightswatch_command,
+    &nightswatch_command,
     &exit_command
 };
 
