@@ -17,7 +17,7 @@
 #define RESET   "\x1b[0m"
 
 int ls_command(char **command);
-int ls_null();
-int ls_l();
-int ls_a();
-int ls_la();
+int ls_null(char* fp);
+int ls_l(char* fp);
+int ls_a(char* fp);
+int ls_la(char* fp);

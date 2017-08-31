@@ -1,14 +1,14 @@
 #include "ls_command.h"
 
 
-int ls_null()
+int ls_null(char* fp)
 {
     // Implements only ls
     DIR *mydir;
     struct dirent *myfile;
     struct stat mystat;
     char buf[512];
-    mydir = opendir(".");
+    mydir = opendir(fp);
     struct passwd *pwd;
     struct group *grp;
     struct tm *tm;
@@ -25,14 +25,14 @@ int ls_null()
     return 1;
 }
 
-int ls_l()
+int ls_l(char* fp)
 {
     // Implements ls -l
     DIR *mydir;
     struct dirent *myfile;
     struct stat mystat;
     char buf[512];
-    mydir = opendir(".");
+    mydir = opendir(fp);
     struct passwd *pwd;
     struct group *grp;
     struct tm *tm;
@@ -81,14 +81,14 @@ int ls_l()
     return 1;
 }
 
-int ls_a()
+int ls_a(char* fp)
 {
     // Implements ls -la
     DIR *mydir;
     struct dirent *myfile;
     struct stat mystat;
     char buf[512];
-    mydir = opendir(".");
+    mydir = opendir(fp);
     struct passwd *pwd;
     struct group *grp;
     struct tm *tm;
@@ -103,14 +103,14 @@ int ls_a()
     return 1;
 }
 
-int ls_la()
+int ls_la(char* fp)
 {
     // Implements ls -la or ls -al
     DIR *mydir;
     struct dirent *myfile;
     struct stat mystat;
     char buf[512];
-    mydir = opendir(".");
+    mydir = opendir(fp);
     struct passwd *pwd;
     struct group *grp;
     struct tm *tm;
@@ -161,19 +161,50 @@ int ls_command(char **command)
     //printf("%s\n", command[1]);
     if(command[1] == NULL)
     {
-        return ls_null();
+        return ls_null(".");
     }
-    else if(!strcmp(command[1],"-l"))
+    else if(command[1])
     {
-        return ls_l();
+        if(command[2] == NULL && command[1][0] == '-')
+        {
+            if(!strcmp(command[1],"-l"))
+            {
+                return ls_l(".");
+            }
+            else if(!strcmp(command[1],"-a"))
+            {
+                return ls_a(".");
+            }
+            else if(!strcmp(command[1],"-la") || !strcmp(command[1],"-al"))
+            {
+                return ls_la(".");
+            }
+        }
+        else if(command[2] != NULL && command[1][0] != '-')
+        {
+            if(!strcmp(command[2],"-l"))
+            {
+                return ls_l(command[1]);
+            }
+            else if(!strcmp(command[2],"-a"))
+            {
+                return ls_a(command[1]);
+            }
+            else if(!strcmp(command[2],"-la") || !strcmp(command[2],"-al"))
+            {
+                return ls_la(command[1]);
+            }
+        }
+        else if(command[1][0] != '-' && command[2] == NULL)
+        {
+            return ls_null(command[1]);
+        }
+        else
+        {
+            perror("command");
+            return(EXIT_FAILURE);
+        }
     }
-    else if(!strcmp(command[1],"-a"))
-    {
-        return ls_a();
-    }
-    else if(!strcmp(command[1],"-la") || !strcmp(command[1],"-al"))
-    {
-        return ls_la();
-    }
+
     return 1;
 }
