@@ -1,5 +1,14 @@
 #include "executer.h"
 
+void handler(int sig, siginfo_t *siginfo, void *context)
+{
+  int status;
+  pid_t pid;
+  pid = waitpid(-1, &status, WNOHANG);
+  if(pid>0)
+    printf("pid %d exited with status %d\n", pid, WEXITSTATUS(status));
+}
+
 //Function to launch system command which we did not implement without syscall
 int launch_system_command(char **command , int background)
 {
@@ -8,6 +17,14 @@ int launch_system_command(char **command , int background)
     int status;
 
     pid = fork();
+
+    if(background)
+    {
+        struct sigaction act;
+        act.sa_sigaction=&handler;
+        sigaction(SIGCHLD,&act,NULL);
+    }
+
     if (pid == 0)
     {
         // Child process
