@@ -18,15 +18,20 @@ int cd_command(char **command)
         return cd_command(command);
     }
     else if(command[1][0] == '~'){
-        if(chdir(shell_directory) != 0)
+        char* copy_command = (char*)malloc(2*BUFFER_SIZE*sizeof(char));
+        strcpy(copy_command , shell_directory);
+        strcat(copy_command , &command[1][1]);
+        if(chdir(copy_command) != 0)
         {
             perror("command");
+            free(copy_command);
             return 1;
         }
         else
         {
             strcpy(previous_directory , current_directory);
             strcpy(current_directory , command[1]);
+            free(copy_command);
             return 1;
         }
     }
@@ -36,17 +41,20 @@ int cd_command(char **command)
         strcpy(command[1] , previous_directory);
         return cd_command(command);
     }
-    else if(chdir(command[1]) != 0)
-    {
-        //Error in changing directory
-        perror("command");
-        return 1;
-    }
     else
     {
-        strcpy(previous_directory , current_directory);
-        strcpy(current_directory , command[1]);
-        return 1;
+        if(chdir(command[1]) != 0)
+        {
+            //Error in changing directory
+            perror("command");
+            return 1;
+        }
+        else
+        {
+            strcpy(previous_directory , current_directory);
+            strcpy(current_directory , command[1]);
+            return 1;
+        }
     }
     return 1;
 }

@@ -7,7 +7,6 @@ extern const char* DELIMITERS;
 extern const char* COMMAND_DELIMITER;
 extern const char (*builtin_commands[]);
 extern const int (*execute_command[])(char **);
-extern const int count_commands;
 //Absolute path of current directory
 extern const char* shell_directory;
 extern char* current_directory;

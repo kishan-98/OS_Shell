@@ -66,7 +66,7 @@ int execute(char** command){
 
     //Check if command is implemented by this shell
     int id;
-    for(id = 0; id < count_commands; id++)
+    for(id = 0; builtin_commands[id]; id++)
     {
         if(strcmp(command[0] , builtin_commands[id]) == 0)
         {

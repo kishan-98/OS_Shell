@@ -22,7 +22,8 @@ char (*builtin_commands[]) = {
     "pinfo",
     "nightswatch",
     "nw",
-    "exit"
+    "exit",
+    NULL
 };
 
 //These must be synced with the function above

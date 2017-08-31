@@ -1,5 +1,2 @@
 pinfo is little incomplete; give the lines you want to print
 ls
-bonus:
-	proper exit info
-	nightswatch command
