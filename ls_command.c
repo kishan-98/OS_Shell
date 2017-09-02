@@ -159,7 +159,53 @@ int ls_la(char* fp)
 int ls_command(char **command)
 {
     //printf("%s\n", command[1]);
-    if(command[1] == NULL)
+    if(command == NULL)
+    {
+        //Not any command
+        fprintf(stderr , "%s\n", "command: expected command");
+        return 1;
+    }
+
+    int i = 0;
+    int flag_ls_l = 0, flag_ls_a = 0;
+    char* path = (char*)malloc(BUFFER_SIZE*sizeof(char));
+    path[0] = '.';
+    path[1] = '\0';
+    for(i = 1; command[i]; i++)
+    {
+        if(command[i][0]=='-'){
+            int j;
+            for(j = 1; command[i][j] != '\0'; j++)
+            {
+                if(command[i][j] == 'l')
+                {
+                    flag_ls_l = 1;
+                }
+                else if(command[i][j] == 'a')
+                {
+                    flag_ls_a = 1;
+                }
+            }
+        }
+        else{
+            strcpy(path , command[i]);
+        }
+    }
+
+    if(flag_ls_l)
+    {
+        if(flag_ls_a)
+        {
+            return ls_la(path);
+        }
+        return ls_l(path);
+    }
+    else if(flag_ls_a)
+    {
+        return ls_a(path);
+    }
+    return ls_null(path);
+    /*if(command[1] == NULL)
     {
         return ls_null(".");
     }
@@ -180,6 +226,10 @@ int ls_command(char **command)
                 return ls_la(".");
             }
         }
+        else if(command[2] != NULL && command[1][0] == '-' && ((!strcmp(command[1] , "-a") && !strcmp(command[2] , "-l")) || (!strcmp(command[2] , "-a") && !strcmp(command[1] , "-l"))))
+        {
+            return ls_la(".");
+        }
         else if(command[2] != NULL && command[1][0] != '-')
         {
             if(!strcmp(command[2],"-l"))
@@ -195,6 +245,20 @@ int ls_command(char **command)
                 return ls_la(command[1]);
             }
         }
+        else if(command[3]){
+            if(command[1][0] != '-')
+            {
+                return ls_la(command[1]);
+            }
+            else if(command[2][0] != '-')
+            {
+                return ls_la(command[2]);
+            }
+            else
+            {
+                return ls_la(command[3]);
+            }
+        }
         else if(command[1][0] != '-' && command[2] == NULL)
         {
             return ls_null(command[1]);
@@ -204,7 +268,7 @@ int ls_command(char **command)
             perror("command");
             return(EXIT_FAILURE);
         }
-    }
+    }*/
 
     return 1;
 }

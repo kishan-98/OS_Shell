@@ -13,7 +13,7 @@ int help_command(char **command)
     fprintf(stdout , "%s\n", "Welcome to shell!");
     fprintf(stdout , "%s\n", "To use shell type anyone of the below commands with appropriate arguments and hit enter");
     fprintf(stdout , "%s\n", "These are built in commands");
-    for(id = 0; id < count_commands; id++)
+    for(id = 0; builtin_commands[id]; id++)
     {
         fprintf(stdout, "%s\n", builtin_commands[id]);
     }
