@@ -1,14 +1,26 @@
 #include "ls_command.h"
 
-
 int ls_null(char* fp)
 {
     // Implements only ls
+    if (fp[0] == '~')
+    {
+        char* temp = (char*)malloc(2*BUFFER_SIZE*sizeof(char));
+        strcpy(temp,shell_directory);
+        strcat(temp, &fp[1]);
+        strcpy(fp, temp);
+        free(temp);
+    }
     DIR *mydir;
     struct dirent *myfile;
     struct stat mystat;
     char buf[512];
     mydir = opendir(fp);
+    if(!mydir)
+    {
+        perror("command");
+        return 1;
+    }
     struct passwd *pwd;
     struct group *grp;
     struct tm *tm;
@@ -28,11 +40,24 @@ int ls_null(char* fp)
 int ls_l(char* fp)
 {
     // Implements ls -l
+    if (fp[0] == '~')
+    {
+        char* temp = (char*)malloc(2*BUFFER_SIZE*sizeof(char));
+        strcpy(temp,shell_directory);
+        strcat(temp, &fp[1]);
+        strcpy(fp, temp);
+        free(temp);
+    }
     DIR *mydir;
     struct dirent *myfile;
     struct stat mystat;
     char buf[512];
     mydir = opendir(fp);
+    if(!mydir)
+    {
+        perror("command");
+        return 1;
+    }
     struct passwd *pwd;
     struct group *grp;
     struct tm *tm;
@@ -84,11 +109,24 @@ int ls_l(char* fp)
 int ls_a(char* fp)
 {
     // Implements ls -la
+    if (fp[0] == '~')
+    {
+        char* temp = (char*)malloc(2*BUFFER_SIZE*sizeof(char));
+        strcpy(temp,shell_directory);
+        strcat(temp, &fp[1]);
+        strcpy(fp, temp);
+        free(temp);
+    }
     DIR *mydir;
     struct dirent *myfile;
     struct stat mystat;
     char buf[512];
     mydir = opendir(fp);
+    if(!mydir)
+    {
+        perror("command");
+        return 1;
+    }
     struct passwd *pwd;
     struct group *grp;
     struct tm *tm;
@@ -106,11 +144,24 @@ int ls_a(char* fp)
 int ls_la(char* fp)
 {
     // Implements ls -la or ls -al
+    if (fp[0] == '~')
+    {
+        char* temp = (char*)malloc(2*BUFFER_SIZE*sizeof(char));
+        strcpy(temp,shell_directory);
+        strcat(temp, &fp[1]);
+        strcpy(fp, temp);
+        free(temp);
+    }
     DIR *mydir;
     struct dirent *myfile;
     struct stat mystat;
     char buf[512];
     mydir = opendir(fp);
+    if(!mydir)
+    {
+        perror("command");
+        return 1;
+    }
     struct passwd *pwd;
     struct group *grp;
     struct tm *tm;
@@ -205,70 +256,6 @@ int ls_command(char **command)
         return ls_a(path);
     }
     return ls_null(path);
-    /*if(command[1] == NULL)
-    {
-        return ls_null(".");
-    }
-    else if(command[1])
-    {
-        if(command[2] == NULL && command[1][0] == '-')
-        {
-            if(!strcmp(command[1],"-l"))
-            {
-                return ls_l(".");
-            }
-            else if(!strcmp(command[1],"-a"))
-            {
-                return ls_a(".");
-            }
-            else if(!strcmp(command[1],"-la") || !strcmp(command[1],"-al"))
-            {
-                return ls_la(".");
-            }
-        }
-        else if(command[2] != NULL && command[1][0] == '-' && ((!strcmp(command[1] , "-a") && !strcmp(command[2] , "-l")) || (!strcmp(command[2] , "-a") && !strcmp(command[1] , "-l"))))
-        {
-            return ls_la(".");
-        }
-        else if(command[2] != NULL && command[1][0] != '-')
-        {
-            if(!strcmp(command[2],"-l"))
-            {
-                return ls_l(command[1]);
-            }
-            else if(!strcmp(command[2],"-a"))
-            {
-                return ls_a(command[1]);
-            }
-            else if(!strcmp(command[2],"-la") || !strcmp(command[2],"-al"))
-            {
-                return ls_la(command[1]);
-            }
-        }
-        else if(command[3]){
-            if(command[1][0] != '-')
-            {
-                return ls_la(command[1]);
-            }
-            else if(command[2][0] != '-')
-            {
-                return ls_la(command[2]);
-            }
-            else
-            {
-                return ls_la(command[3]);
-            }
-        }
-        else if(command[1][0] != '-' && command[2] == NULL)
-        {
-            return ls_null(command[1]);
-        }
-        else
-        {
-            perror("command");
-            return(EXIT_FAILURE);
-        }
-    }*/
 
     return 1;
 }
