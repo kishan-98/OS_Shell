@@ -14,6 +14,8 @@ int getenv_command(char **command);
 int setenv_command(char **command);
 int unsetenv_command(char **command);
 int jobs_command(char **command);
+int kjob_command(char **command);
+int overkill_command(char **command);
 int exit_command(char **command);
 int pipelining(char **command, int count_pipes);
 
@@ -31,6 +33,8 @@ char (*builtin_commands[]) = {
     "setenv",
     "unsetenv",
     "jobs",
+    "kjob",
+    "overkill",
     "exit",
     "quit",
     NULL
@@ -50,6 +54,8 @@ int (*execute_command[])(char **) = {
     &setenv_command,
     &unsetenv_command,
     &jobs_command,
+    &kjob_command,
+    &overkill_command,
     &exit_command,
     &exit_command
 };

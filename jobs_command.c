@@ -30,6 +30,9 @@ int jobs_command(char **command)
          exit(0);
     }
 
+    int PARENT = getpid();
+    printf("PARENT: %d\n",PARENT);
+
     while ((entry = readdir (dirp)) != NULL)
     {
         if (check_if_number (entry->d_name))
@@ -49,10 +52,8 @@ int jobs_command(char **command)
             unsigned long minflt,cminflt,majflt,cmajflt,utime,stime;
             unsigned long long starttime;
             long cutime,cstime,priority,nice,num_threads,itreavalue;
-            //sscanf(line,"%d %s %c %d %d %d %d %d %u %lu %lu %lu %lu %lu %lu %ld %ld %ld %ld %ld  %ld %llu",&pid,comm,&state,&ppid,&pgrp,&session,&tty_nr,&tpgid,&flags,&minflt,&cminflt,&majflt,&cmajflt,&utime,&stime,&cutime,&cstime,&priority,&nice,&num_threads,&itreavalue,&starttime);
-            sscanf(line,"%d %s %c %d %d %d %d",&pid,comm,&state,&ppid,&pgrp,&session,&tty_nr);
-            //unsigned long total_time=utime+stime;
-            //total_time=total_time+(unsigned long)cutime+(unsigned long)cstime;
+            sscanf(line,"%d %s %c %d %d %d %d %d %u %lu %lu %lu %lu %lu %lu %ld %ld %ld %ld %ld  %ld %llu",&pid,comm,&state,&ppid,&pgrp,&session,&tty_nr,&tpgid,&flags,&minflt,&cminflt,&majflt,&cmajflt,&utime,&stime,&cutime,&cstime,&priority,&nice,&num_threads,&itreavalue,&starttime);
+            //sscanf(line,"%d %s %c %d %d %d %d",&pid,comm,&state,&ppid,&pgrp,&session,&tty_nr);
 
             // Get the name of the process
             strcpy (path, "/proc/");
@@ -66,8 +67,8 @@ int jobs_command(char **command)
             fclose(fp);
             }
             //printf("@@@ %s \n",entry->d_name);
-
-            if (ppid > 2 && tty_nr && pid > 2000)
+            //printf("id: %d\n",ppid);
+            if (ppid == PARENT)
                 fprintf(stdout,"%s %c %s\n",entry->d_name,state,read_buf);
         }
     }

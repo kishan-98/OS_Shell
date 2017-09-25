@@ -12,6 +12,7 @@
 #include <locale.h>
 #include <langinfo.h>
 #include <inttypes.h>
+#include <unistd.h>
 #include "global_variable.h"
 
 #define MAX_BUF 1024
