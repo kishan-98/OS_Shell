@@ -16,6 +16,7 @@ int unsetenv_command(char **command);
 int jobs_command(char **command);
 int kjob_command(char **command);
 int overkill_command(char **command);
+int bg_command(char **command);
 int exit_command(char **command);
 int pipelining(char **command, int count_pipes);
 
@@ -35,6 +36,7 @@ char (*builtin_commands[]) = {
     "jobs",
     "kjob",
     "overkill",
+    "bg",
     "exit",
     "quit",
     NULL
@@ -56,6 +58,7 @@ int (*execute_command[])(char **) = {
     &jobs_command,
     &kjob_command,
     &overkill_command,
+    &bg_command,
     &exit_command,
     &exit_command
 };

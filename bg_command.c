@@ -1,15 +1,6 @@
-#include "overkill_command.h"
+#include "bg_command.h"
 
-/*
-int overkill_command(char **command)
-{
-    int res = kill(0,9);
-    printf("Process %d terminated\n", res);
-    return 1;
-}
-*/
-
-int overkill_command(char **command)
+int bg_command(char **command)
 {
     DIR *dirp;
     FILE *fp;
@@ -27,7 +18,6 @@ int overkill_command(char **command)
     }
 
     int PARENT = getpid();
-    //printf("PARENT: %d\n",PARENT);
 
     while ((entry = readdir (dirp)) != NULL)
     {
@@ -67,7 +57,7 @@ int overkill_command(char **command)
             if (ppid == PARENT)
             {
                 fprintf(stdout,"%s %c %s\n",entry->d_name,state,read_buf);
-                kill(pid,9);
+                printf("RETURN: %d ",kill(pid, SIGCONT));
             }
         }
     }

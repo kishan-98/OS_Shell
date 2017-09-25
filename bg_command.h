@@ -21,4 +21,4 @@
 #define PID_LIST_BLOCK 32
 #define UP_TIME_SIZE 10
 
-int overkill_command(char **command);
+int bg_command(char **command);
