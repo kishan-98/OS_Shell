@@ -207,7 +207,7 @@ int ls_la(char* fp)
     return 1;
 }
 
-int ls_command(char **command)
+const int ls_command(char **command)
 {
     //printf("%s\n", command[1]);
     if(command == NULL)

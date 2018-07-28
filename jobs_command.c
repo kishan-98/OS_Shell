@@ -13,7 +13,7 @@ int check_if_number (char *str)
   return 1;
 }
 
-int jobs_command(char **command)
+const int jobs_command(char **command)
 {
     DIR *dirp;
     FILE *fp;

@@ -8,4 +8,4 @@
 #include "global_variable.h"
 
 int get_number(char* args);
-int kjob_command(char **command);
+const int kjob_command(char **command);

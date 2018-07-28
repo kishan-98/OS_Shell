@@ -6,7 +6,7 @@ void print_info(char* line){
 }
 
 char** parse(){
-    //fprintf(stdout , "%s\n" , "Inside parser");
+    // fprintf(stdout , "%s\n" , "Inside parser");
     int curr_buffer_size = BUFFER_SIZE;
     int curr_pos = 0;
     char* command = (char*)malloc(curr_buffer_size*sizeof(char));
@@ -19,7 +19,7 @@ char** parse(){
         if(c == '\n' || c == EOF){
             //Line is over; Stop parsing further
             command[curr_pos++] = '\0';
-            //print_info(command);
+            // print_info(command);
             return tokenize(command , COMMAND_DELIMITER);
         }
         else{

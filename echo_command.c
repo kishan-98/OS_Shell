@@ -1,6 +1,6 @@
 #include "echo_command.h"
 
-int echo_command(char **command)
+const int echo_command(char **command)
 {
     if(command == NULL)
     {

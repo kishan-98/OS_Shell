@@ -8,6 +8,7 @@ extern const char* COMMAND_DELIMITER;
 extern const char* PIPING_DELIMITER;
 extern const char* REDIRECTION_DELIMITER;
 extern const char (*builtin_commands[]);
+extern const char (*builtin_commands_help[]);
 extern const int (*execute_command[])(char **);
 //Absolute path of current directory
 extern const char* shell_directory;

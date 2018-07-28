@@ -15,10 +15,11 @@
 #include <unistd.h>
 #include <signal.h>
 #include "global_variable.h"
+#include "jobs_command.h"
 
 #define MAX_BUF 1024
 #define INT_SIZE_BUF 6
 #define PID_LIST_BLOCK 32
 #define UP_TIME_SIZE 10
 
-int bg_command(char **command);
+const int bg_command(char **command);

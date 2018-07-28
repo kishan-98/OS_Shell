@@ -16,8 +16,6 @@
 #include <inttypes.h>
 #include "global_variable.h"
 
-float DEFAULT_TIME = 2;
-
 float get_time(char* args);
 
 char* get_interrupt_details(char* line);
@@ -33,4 +31,4 @@ int nightswatch_dirty();
 //These must be synced with the function above
 int (*execute_nightswatch_command[])();*/
 
-int nightswatch_command(char **command);
+const int nightswatch_command(char **command);

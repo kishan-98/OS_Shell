@@ -1,6 +1,6 @@
 #include "cd_command.h"
 
-int cd_command(char **command)
+const int cd_command(char **command)
 {
     if(command == NULL)
     {

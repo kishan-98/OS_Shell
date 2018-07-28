@@ -1,6 +1,6 @@
 #include "pinfo_command.h"
 
-int pinfo_command(char **command)
+const int pinfo_command(char **command)
 {
     if(command == NULL)
     {

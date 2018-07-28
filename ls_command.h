@@ -16,7 +16,7 @@
 #define KGRN  "\x1B[32m"
 #define RESET   "\x1b[0m"
 
-int ls_command(char **command);
+const int ls_command(char **command);
 int ls_null(char* fp);
 int ls_l(char* fp);
 int ls_a(char* fp);

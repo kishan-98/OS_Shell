@@ -5,4 +5,4 @@
 #include <sys/utsname.h>
 #include "global_variable.h"
 
-int help_command(char **command);
+const int help_command(char **command);

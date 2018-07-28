@@ -1,5 +1,7 @@
 #include "nightswatch_command.h"
 
+float DEFAULT_TIME = 2;
+
 float get_time(char* args)
 {
     //Convert string to integer if valid otherwise return 0
@@ -279,7 +281,7 @@ int (*execute_nightswatch_command[])() = {
     &nightswatch_dirty
 };
 
-int nightswatch_command(char **command)
+const int nightswatch_command(char **command)
 {
     if(command == NULL)
     {

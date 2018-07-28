@@ -1,27 +1,27 @@
 #include "shell.h"
 
-int TOKEN_SIZE = 64;
-int BUFFER_SIZE = 1024;
+const int TOKEN_SIZE = 64;
+const int BUFFER_SIZE = 1024;
 
-int help_command(char **command);
-int cd_command(char **command);
-int ls_command(char **command);
-int pwd_command(char **command);
-int echo_command(char **command);
-int pinfo_command(char **command);
-int nightswatch_command(char **command);
-int getenv_command(char **command);
-int setenv_command(char **command);
-int unsetenv_command(char **command);
-int jobs_command(char **command);
-int overkill_command(char **command);
-int kjob_command(char **command);
-int bg_command(char **command);
-int exit_command(char **command);
+const int help_command(char **command);
+const int cd_command(char **command);
+const int ls_command(char **command);
+const int pwd_command(char **command);
+const int echo_command(char **command);
+const int pinfo_command(char **command);
+const int nightswatch_command(char **command);
+const int getenv_command(char **command);
+const int setenv_command(char **command);
+const int unsetenv_command(char **command);
+const int jobs_command(char **command);
+const int overkill_command(char **command);
+const int kjob_command(char **command);
+const int bg_command(char **command);
+const int exit_command(char **command);
 int pipelining(char **command, int count_pipes);
 
 //These must be synced with the function below
-char (*builtin_commands[]) = {
+const char (*builtin_commands[]) = {
     "help",
     "cd",
     "ls",
@@ -42,8 +42,29 @@ char (*builtin_commands[]) = {
     NULL
 };
 
+const char (*builtin_commands_help[]) = {
+    "Displays all the commands",
+    "Changes directory",
+    "List all files",
+    "Displays current directory",
+    "Print the following string",
+    "Process info",
+    "Ticks the given command",
+    "Ticks the given command",
+    "Gets the environmental variable of the current shell",
+    "Sets the environmental variable of the current shell",
+    "Unsets the environmental variable of the current shell",
+    "jobs",
+    "overkill",
+    "kjob",
+    "Background current command",
+    "Exit the current shell",
+    "Quit the current shell",
+    NULL
+};
+
 //These must be synced with the function above
-int (*execute_command[])(char **) = {
+const int (*execute_command[])(char **) = {
     &help_command,
     &cd_command,
     &ls_command,
@@ -67,9 +88,10 @@ int (*execute_command[])(char **) = {
 int count_commands = sizeof(builtin_commands)/sizeof(char*);
 
 //Initializing the various directory path
-char* shell_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
+const char* shell_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
 char* current_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
 char* previous_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
+char* temp_directory;// = (char*)malloc(BUFFER_SIZE*sizeof(char));
 
 char *user;
 char *host;
@@ -119,25 +141,31 @@ void init_shell(void)
 	shell_directory = (char*)malloc(BUFFER_SIZE*sizeof(char));
 	current_directory = (char*)malloc(BUFFER_SIZE*sizeof(char));
 	previous_directory = (char*)malloc(BUFFER_SIZE*sizeof(char));
-	getcwd(shell_directory , BUFFER_SIZE - 1);
+	getcwd(temp_directory , BUFFER_SIZE - 1);
+    shell_directory = temp_directory;
 	//strcpy(current_directory , shell_directory);
 	current_directory[0] = '~';
 	current_directory[1] = '\0';
 	strcpy(previous_directory , current_directory);
 
 	fprintf(stdout , "%s %s\n", "Shell directory is" , shell_directory);
-
+    fprintf(stdout, "%sinit completed%s\n", "\x1B[34m", "\x1B[0m");
 	do
 	{
 		fprintf(stdout , "%s@%s : %s > " , user , host , current_directory);
 		lines = parse();
+        fprintf(stdout, "%sparsing completed%s\n", "\x1B[31m", "\x1B[0m");
+        // fprintf(stdout, "%s%lu%s\n", "\x1B[32m", sizeof(lines)/sizeof(lines[0]), "\x1B[0m");
+        // fprintf(stdout, "%s%lu%s\n", "\x1B[32m", sizeof(lines[0])/sizeof(lines[0][0]), "\x1B[0m");
 		if(lines)
 		{
 			int i;
 			for(i = 0; lines[i]; i++)
 			{
+                // fprintf(stdout, "%s%d%s\n", "\x1B[34m", i, "\x1B[0m");
+                // fprintf(stdout, "%s%s%s\n", "\x1B[34m", lines[i], "\x1B[0m");
                 int count_pipes;
-                if(count_pipes = is_piping(lines[i]))
+                if((count_pipes = is_piping(lines[i])))
                 {
                     //fprintf(stdout, "***%s\n", lines[i]);
                     args = tokenize(lines[i], DELIMITERS);
@@ -149,6 +177,7 @@ void init_shell(void)
                 {
                     //fprintf(stdout, "###%s\n", lines[i]);
                     args = tokenize(lines[i] , DELIMITERS);
+                    // fprintf(stdout, "%stokenize completed%s\n", "\x1B[32m", "\x1B[0m");
                     //background = is_background(args);
                     status = execute(args);
                     free(args);

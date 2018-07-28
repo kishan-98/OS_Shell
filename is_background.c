@@ -22,7 +22,7 @@ int is_background(char **command)
         if(!strcmp(command[i] , "&") || !strcmp(command[i] , "bg"))
         {
             //This command is background process
-            command[i] = '\0';
+            command[i] = "\0";
             return 1;
         }
     }

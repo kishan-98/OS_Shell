@@ -5,4 +5,4 @@
 #include <sys/utsname.h>
 #include "global_variable.h"
 
-int pwd_command(char **command);
+const int pwd_command(char **command);

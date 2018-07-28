@@ -1,6 +1,6 @@
 #include "exit_command.h"
 
-int exit_command(char **command)
+const int exit_command(char **command)
 {
     if(command == NULL)
     {

@@ -147,7 +147,7 @@ int execute(char** command){
         return 1;
     }
 
-    //fprintf(stdout, "%s\n", "Debugger");
+    // fprintf(stdout, "%s\n", "Inside execute");
     //print_info2(command);
 
     char **temp_command;

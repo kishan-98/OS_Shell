@@ -9,7 +9,7 @@ int overkill_command(char **command)
 }
 */
 
-int overkill_command(char **command)
+const int overkill_command(char **command)
 {
     DIR *dirp;
     FILE *fp;

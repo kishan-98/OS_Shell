@@ -1,6 +1,6 @@
 #include "help_command.h"
 
-int help_command(char **command)
+const int help_command(char **command)
 {
     if(command == NULL)
     {
@@ -15,7 +15,7 @@ int help_command(char **command)
     fprintf(stdout , "%s\n", "These are built in commands");
     for(id = 0; builtin_commands[id]; id++)
     {
-        fprintf(stdout, "%s\n", builtin_commands[id]);
+        fprintf(stdout, "%s : %s\n", builtin_commands[id], builtin_commands_help[id]);
     }
     fprintf(stdout , "%s\n", "For advanced functions refer to man command");
     return 1;

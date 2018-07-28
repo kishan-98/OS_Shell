@@ -1,6 +1,6 @@
 #include "pwd_command.h"
 
-int pwd_command(char **command)
+const int pwd_command(char **command)
 {
     if(command == NULL)
     {

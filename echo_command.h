@@ -5,4 +5,4 @@
 #include <sys/utsname.h>
 #include "global_variable.h"
 
-int echo_command(char **command);
+const int echo_command(char **command);

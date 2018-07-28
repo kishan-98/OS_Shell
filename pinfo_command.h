@@ -5,4 +5,4 @@
 #include <sys/utsname.h>
 #include "global_variable.h"
 
-int pinfo_command(char **command);
+const int pinfo_command(char **command);

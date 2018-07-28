@@ -1,6 +1,6 @@
 #include "bg_command.h"
 
-int bg_command(char **command)
+const int bg_command(char **command)
 {
     DIR *dirp;
     FILE *fp;

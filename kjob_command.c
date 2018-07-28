@@ -21,7 +21,7 @@ int get_number(char* args)
     return number;
 }
 
-int kjob_command(char **command)
+const int kjob_command(char **command)
 {
     if(command[1] && command[2])
     {
@@ -37,7 +37,7 @@ int kjob_command(char **command)
             return 1;
         }
         int res = kill(pid,sig);
-        printf("Process %lu terminated\n", pid);
+        printf("Process %d terminated\n", pid);
     }
     else
     {

@@ -49,7 +49,7 @@ int pipelining(char **command, int count_pipes)
 				}
 			}
 			printf("Child process could not be created\n");
-			return;
+			return 1;
 		}
 		if(pid==0){
 			// If we are in the first command
@@ -110,6 +110,7 @@ int pipelining(char **command, int count_pipes)
 
 		i++;
     }
+    return 1;
 }
 
 void pipeHandler(char * args[]){

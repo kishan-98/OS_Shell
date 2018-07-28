@@ -5,4 +5,4 @@
 #include <sys/utsname.h>
 #include "global_variable.h"
 
-int cd_command(char **command);
+const int cd_command(char **command);

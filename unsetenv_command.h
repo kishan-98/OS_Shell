@@ -5,4 +5,4 @@
 #include <sys/utsname.h>
 #include "global_variable.h"
 
-int unsetenv_command(char **command);
+const int unsetenv_command(char **command);

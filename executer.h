@@ -8,10 +8,7 @@
 #include <fcntl.h>
 #include <signal.h>
 #include "global_variable.h"
-
-const int TOKEN_SIZE;
-const int BUFFER_SIZE;
-const char* DELIMITERS;
+#include "is_background.h"
 
 int execute_system_command(char ** args, int background);
 //If function is not present, then call syscall

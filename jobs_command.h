@@ -13,6 +13,7 @@
 #include <langinfo.h>
 #include <inttypes.h>
 #include <unistd.h>
+#include <ctype.h>
 #include "global_variable.h"
 
 #define MAX_BUF 1024
@@ -21,4 +22,4 @@
 #define UP_TIME_SIZE 10
 
 int check_if_number (char *str);
-int jobs_command(char **command);
+const int jobs_command(char **command);
